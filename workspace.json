@@ -1,0 +1,168 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "defaultProject": "htz",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "projects": {
+    "htz": {
+      "root": "apps/htz",
+      "sourceRoot": "apps/htz",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/htz",
+            "outputPath": "dist/apps/htz"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "htz:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "htz:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "htz:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/htz"],
+          "options": {
+            "jestConfig": "apps/htz/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/htz/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "htz-e2e": {
+      "root": "apps/htz-e2e",
+      "sourceRoot": "apps/htz-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/htz-e2e/cypress.json",
+            "tsConfig": "apps/htz-e2e/tsconfig.e2e.json",
+            "devServerTarget": "htz:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "htz:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/htz-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "theme-merge.macro": {
+      "root": "libs/theme/merge.macro",
+      "sourceRoot": "libs/theme/merge.macro/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/theme/merge.macro/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/theme/merge.macro"],
+          "options": {
+            "jestConfig": "libs/theme/merge.macro/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/theme/merge.macro",
+            "tsConfig": "libs/theme/merge.macro/tsconfig.lib.json",
+            "packageJson": "libs/theme/merge.macro/package.json",
+            "main": "libs/theme/merge.macro/src/index.ts",
+            "assets": ["libs/theme/merge.macro/*.md"],
+            "buildLibsFromSource": true,
+            "generatePackageJson": true,
+            "progress": true
+          }
+        }
+      }
+    },
+    "theme-shared": {
+      "root": "libs/theme/shared",
+      "sourceRoot": "libs/theme/shared/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/theme/shared/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/theme/shared"],
+          "options": {
+            "jestConfig": "libs/theme/shared/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/theme/shared",
+            "tsConfig": "libs/theme/shared/tsconfig.lib.json",
+            "packageJson": "libs/theme/shared/package.json",
+            "main": "libs/theme/shared/src/index.ts",
+            "assets": ["libs/theme/shared/*.md"],
+            "generatePackageJson": true,
+            "progress": true
+          }
+        }
+      }
+    }
+  }
+}

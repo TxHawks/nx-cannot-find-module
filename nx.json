@@ -1,0 +1,36 @@
+{
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "haaretz",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "projects": {
+    "htz": {
+      "tags": []
+    },
+    "htz-e2e": {
+      "tags": [],
+      "implicitDependencies": ["htz"]
+    },
+    "theme-merge.macro": {
+      "tags": []
+    },
+    "theme-shared": {
+      "tags": []
+    }
+  }
+}
